@@ -5,13 +5,17 @@ import { MailerService } from '@nestjs-modules/mailer'
 export class EmailServerService {
   constructor(private mailerService: MailerService) {}
 
-  sendMail() {
-    console.log('sending mail')
+  sendMail(name, phoneNumber, emailAddress, date) {
     this.mailerService.sendMail({
       to: 'traianstefanx@gmail.com',
-      subject: 'Greeting from NestJS NodeMailer',
+      subject: 'Programare',
       template: 'email',
-      context: { name: 'traian' },
+      context: {
+        name: name,
+        phone: phoneNumber,
+        email: emailAddress,
+        date: date,
+      },
     })
   }
 }

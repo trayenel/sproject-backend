@@ -11,7 +11,7 @@ import * as process from 'node:process'
     MailerModule.forRoot({
       transport: {
         host: String(process.env["MAIL_HOST "]),
-        port: Number(process.env["MAIL_PORT "]),
+        port: Number(process.env["MAIL_HOST "]),
         secure: false,
         auth: {
           user: process.env["MAIL_USER "],
