@@ -10,12 +10,12 @@ import * as process from 'node:process'
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: String(process.env["MAIL_HOST "]),
+        port: Number(process.env["MAIL_PORT "]),
         secure: false,
         auth: {
-          user:"bb007ec216d254",
-          pass: "f59a88b66d5971",
+          user: process.env["MAIL_USER "],
+          pass: process.env["MAIL_PASS "],
         },
       },
       defaults: { from: '"nest-modules" <modules@nestjs.com>' },
