@@ -1,39 +1,16 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { MailerModule } from '@nestjs-modules/mailer'
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter'
-import { EmailServerModule } from './email-server/email-server.module'
-import { ConfigModule } from '@nestjs/config'
-import dataSource from "./database/database.config";
-import { TypeOrmModule } from '@nestjs/typeorm'
-import * as process from 'node:process'
+import { MailerServerModule } from './mailer-server/mailer-server.module'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { DatabaseModule } from './database/database.module'
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    MailerModule.forRootAsync({
-      imports: undefined,
-      useFactory: () => ({
-        transport: {
-          host: process.env.MAIL_HOST,
-          port: +process.env.MAIL_PORT,
-          secure: false,
-          auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS,
-          },
-        },
-        defaults: { from: '"nest-modules" <modules@nestjs.com>' },
-        template: {
-          dir: '/home/traian/IdeaProjects/sproject-backend/src/templates',
-          adapter: new HandlebarsAdapter(),
-          options: { strict: true },
-        },
-      }),
-    }),
-    EmailServerModule,
-    TypeOrmModule.forRoot(dataSource())
+    ConfigModule.forRoot({ isGlobal: true }),
+    MailerServerModule,
+    DatabaseModule,
+    MailerServerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

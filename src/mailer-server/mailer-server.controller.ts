@@ -1,10 +1,10 @@
 import {Body, Controller, Get, Header, Post} from '@nestjs/common'
-import { EmailServerService } from './email-server.service'
+import { MailerServerService } from './mailer-server.service'
 import {FormRequestDto} from "./FormRequestDto";
 
 @Controller('email-server')
-export class EmailServerController {
-  constructor(private readonly mailService: EmailServerService) {}
+export class MailerServerController {
+  constructor(private readonly mailService: MailerServerService) {}
 
   @Post()
   @Header('content-type', 'text/html')
