@@ -5,9 +5,9 @@ import { MailerModule } from '@nestjs-modules/mailer'
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter'
 import { EmailServerModule } from './email-server/email-server.module'
 import { ConfigModule } from '@nestjs/config'
+import dataSource from "./database/database.config";
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as process from 'node:process'
-import {appData} from "./database/DataSource";
 
 @Module({
   imports: [
@@ -33,7 +33,7 @@ import {appData} from "./database/DataSource";
       }),
     }),
     EmailServerModule,
-    TypeOrmModule.forRoot(appData)
+    TypeOrmModule.forRoot(dataSource())
   ],
   controllers: [AppController],
   providers: [AppService],
