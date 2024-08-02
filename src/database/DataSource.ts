@@ -1,15 +1,17 @@
-import { DataSource } from 'typeorm'
+import {DataSource, DataSourceOptions} from 'typeorm'
 import * as process from 'node:process'
 
-export default new DataSource({
+export const appData: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
+  port: +process.env.DB_PORT,
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE,
+  entities: ['entities/**/*.entity.ts'],
+  migrations: ['migrations/**/*.ts'],
   synchronize: false,
-  migrations: [
-    '/home/traian/IdeaProjects/sproject-backend/src/database/migrations/1722591474988-init_db.ts',
-  ],
-})
+}
+
+const dataSource = new DataSource(appData)
+export default dataSource

@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity()
 export class Roles {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number
 
   @Column({ type: 'varchar', length: 20, unique: true, nullable: false })

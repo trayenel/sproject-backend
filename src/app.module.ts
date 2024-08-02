@@ -7,20 +7,11 @@ import { EmailServerModule } from './email-server/email-server.module'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as process from 'node:process'
+import {appData} from "./database/DataSource";
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_DATABASE,
-      entities: [],
-      synchronize: true,
-    }),
     MailerModule.forRootAsync({
       imports: undefined,
       useFactory: () => ({
@@ -42,6 +33,7 @@ import * as process from 'node:process'
       }),
     }),
     EmailServerModule,
+    TypeOrmModule.forRoot(appData)
   ],
   controllers: [AppController],
   providers: [AppService],

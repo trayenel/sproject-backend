@@ -1,9 +1,9 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm'
-import { Users } from './UsersModel'
+import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from 'typeorm'
+import { Users } from './users.entity'
 
 @Entity()
 export class UserRoles {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number
 
   @OneToOne(() => Users)
