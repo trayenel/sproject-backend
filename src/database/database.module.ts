@@ -1,10 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { Users } from './entities/users/users.entity'
-import { DataSource } from 'typeorm'
-import {Roles} from "./entities/roles/roles.entity";
-import {UserRoles} from "./entities/userRoles/userRoles.entity";
 
 @Module({
   imports: [
@@ -18,9 +14,9 @@ import {UserRoles} from "./entities/userRoles/userRoles.entity";
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASS'),
         database: configService.get('DB_DATABASE'),
-        entities: [Users, Roles, UserRoles],
+        autoLoadEntities: true,
         migrations: ['migrations/**/*.ts'],
-        synchronize: false,
+        synchronize: true,
       }),
     }),
   ],
