@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from 'typeorm'
 export class InitDb1722680462887 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      'CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(20) NOT NULL, password VARCHAR(20) NOT NULL)',
+      'CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(20) NOT NULL UNIQUE, first_name VARCHAR(20) NOT NULL, last_name VARCHAR(20) NOT NULL, email VARCHAR(20) NOT NULL UNIQUE, password VARCHAR(20) NOT NULL)',
     )
 
     await queryRunner.query(
@@ -15,7 +15,7 @@ export class InitDb1722680462887 implements MigrationInterface {
     )
 
     await queryRunner.query(
-      'CREATE TABLE blog(id SERIAL PRIMARY KEY, name VARCHAR(20) UNIQUE NOT NULL , body VARCHAR(500) NOT NULL , created_at TIMESTAMP NOT NULL DEFAULT LOCALTIME, updated_at TIMESTAMP NOT NULL DEFAULT LOCALTIME)',
+      'CREATE TABLE blog(id SERIAL PRIMARY KEY, name VARCHAR(20) UNIQUE NOT NULL, body VARCHAR(500) NOT NULL , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)',
     )
   }
 
@@ -25,5 +25,7 @@ export class InitDb1722680462887 implements MigrationInterface {
     await queryRunner.query('DROP TABLE roles')
 
     await queryRunner.query('DROP TABLE users')
+
+    await queryRunner.query('DROP TABLE blog')
   }
 }

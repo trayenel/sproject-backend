@@ -2,11 +2,10 @@ import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { MailerServerModule } from './mailer-server/mailer-server.module'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config'
 import { DatabaseModule } from './database/database.module'
 import { UsersModule } from './users/users.module'
 import { RolesModule } from './roles/roles.module'
-import { UserRolesModule } from './user-roles/user-roles.module'
 import { BlogModule } from './blog/blog.module'
 
 @Module({
@@ -17,7 +16,6 @@ import { BlogModule } from './blog/blog.module'
     MailerServerModule,
     UsersModule,
     RolesModule,
-    UserRolesModule,
     BlogModule,
   ],
   controllers: [AppController],

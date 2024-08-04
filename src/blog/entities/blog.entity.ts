@@ -11,9 +11,21 @@ export class Blog {
   @Column({ nullable: false, type: 'varchar', length: 500 })
   body: string
 
-  @Column({ nullable: false, type: 'timestamp' })
+  @Column({
+    nullable: false,
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   created_at: string
 
-  @Column({ nullable: false, type: 'timestamp' })
+  @Column({
+    nullable: false,
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   updated_at: string
+
+  constructor(blogPost: Partial<Blog>) {
+    Object.assign(this, blogPost)
+  }
 }

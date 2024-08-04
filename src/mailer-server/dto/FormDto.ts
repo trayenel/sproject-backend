@@ -1,4 +1,4 @@
-export class FormRequestDto {
+export class FormDto {
   name: string
   phoneNumber: number
   date: string

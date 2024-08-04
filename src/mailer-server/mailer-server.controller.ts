@@ -1,6 +1,6 @@
-import {Body, Controller, Get, Header, Post} from '@nestjs/common'
+import { Body, Controller, Get, Header, Post } from '@nestjs/common'
 import { MailerServerService } from './mailer-server.service'
-import {FormRequestDto} from "./FormRequestDto";
+import { FormDto } from './dto/FormDto'
 
 @Controller('email-server')
 export class MailerServerController {
@@ -8,7 +8,7 @@ export class MailerServerController {
 
   @Post()
   @Header('content-type', 'text/html')
-  sendMail(@Body() formBody: FormRequestDto) {
+  sendMail(@Body() formBody: FormDto) {
     return this.mailService.sendMail(formBody.name, formBody.phoneNumber, formBody.email, formBody.date)
   }
 }

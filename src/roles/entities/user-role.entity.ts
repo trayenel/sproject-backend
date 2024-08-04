@@ -1,11 +1,10 @@
 import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Users } from '../../users/entities/user.entity'
-import { Roles } from '../../roles/entities/role.entity'
+import { Roles } from './role.entity'
 
 @Entity()
 export class UserRoles {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryGeneratedColumn() id: number
 
   @OneToOne(() => Users, { onDelete: 'CASCADE' })
   @JoinColumn()
@@ -14,4 +13,8 @@ export class UserRoles {
   @OneToOne(() => Roles, { onDelete: 'CASCADE' })
   @JoinColumn()
   role: Roles
+
+  constructor(UserRole: Partial<UserRoles>) {
+    Object.assign(this, UserRole)
+  }
 }
